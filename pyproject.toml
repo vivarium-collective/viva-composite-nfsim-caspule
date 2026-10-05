@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pbg-composite-nfsim-caspule"
+name = "viva-composite-nfsim-caspule"
 version = "0.1.0"
 description = "Process-bigraph composite: CASPULE bond-aware MD coupled to NFSim rule-based kinetics via an observable detector."
 requires-python = ">=3.10"
@@ -12,8 +12,8 @@ dependencies = [
   "bigraph-schema",
   "bigraph-viz",
   "pyyaml",
-  "pbg-caspule",
-  "pbg-nfsim",
+  "viva-caspule",
+  "viva-nfsim",
 ]
 
 [project.optional-dependencies]
@@ -21,7 +21,7 @@ test = ["pytest"]
 demo = ["matplotlib", "plotly"]
 
 [project.scripts]
-pbg-composite-nfsim-caspule = "pbg_composite_nfsim_caspule.run:main"
+viva-composite-nfsim-caspule = "pbg_composite_nfsim_caspule.run:main"
 
 [tool.setuptools.packages.find]
 include = ["pbg_composite_nfsim_caspule*"]
