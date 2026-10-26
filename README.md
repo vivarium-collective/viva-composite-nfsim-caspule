@@ -1,4 +1,4 @@
-# pbg-composite-nfsim-caspule
+# viva-composite-nfsim-caspule
 
 A process-bigraph composite that hands matter from a **spatial bond-aware
 MD simulation**
@@ -10,7 +10,7 @@ watches CASPULE's bond network, picks up clusters that match
 user-defined patterns, removes the matched atoms from CASPULE, and
 credits each match as a named molecule in NFSim's species pool.
 
-**[View Interactive Demo Report](https://vivarium-collective.github.io/pbg-composite-nfsim-caspule/)** — four side-by-side experiments (decoupled baseline, simple Dimer coupling, NFSim at 5x rate, and a multi-rule polymer-fractionation set-up), each with a key-takeaway summary, time-series plots, a 3D scatter of CASPULE positions and bond edges, the cluster-size distribution, the detector rules, the LAMMPS / BNGL / YAML input files, and a collapsible JSON tree of the full PBG document.
+**[View Interactive Demo Report](https://vivarium-collective.github.io/viva-composite-nfsim-caspule/)** — four side-by-side experiments (decoupled baseline, simple Dimer coupling, NFSim at 5x rate, and a multi-rule polymer-fractionation set-up), each with a key-takeaway summary, time-series plots, a 3D scatter of CASPULE positions and bond edges, the cluster-size distribution, the detector rules, the LAMMPS / BNGL / YAML input files, and a collapsible JSON tree of the full PBG document.
 
 ## How to use it
 
@@ -60,11 +60,11 @@ CASPULE clusters:     0 (largest 0)
 NFSim species:        {'Dimer': 12.0, 'Active': 88.0}
 ```
 
-A `pbg-composite-nfsim-caspule` console script is installed alongside,
+A `viva-composite-nfsim-caspule` console script is installed alongside,
 so you can also call it directly:
 
 ```bash
-pbg-composite-nfsim-caspule examples/composite_polymer.pbg.json --total-time 2 --output run.json
+viva-composite-nfsim-caspule examples/composite_polymer.pbg.json --total-time 2 --output run.json
 ```
 
 Useful flags:
@@ -181,8 +181,8 @@ is used unchanged.
 ## Install
 
 ```bash
-git clone https://github.com/vivarium-collective/pbg-composite-nfsim-caspule.git
-cd pbg-composite-nfsim-caspule
+git clone https://github.com/vivarium-collective/viva-composite-nfsim-caspule.git
+cd viva-composite-nfsim-caspule
 
 uv venv .venv
 source .venv/bin/activate
@@ -202,7 +202,7 @@ python demo/demo_report.py
 ```
 
 Regenerates `demo/report.html` (and the version served at
-[vivarium-collective.github.io/pbg-composite-nfsim-caspule](https://vivarium-collective.github.io/pbg-composite-nfsim-caspule/))
+[vivarium-collective.github.io/viva-composite-nfsim-caspule](https://vivarium-collective.github.io/viva-composite-nfsim-caspule/))
 by running all four configurations end-to-end.
 
 ## Tests
