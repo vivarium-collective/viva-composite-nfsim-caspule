@@ -4,10 +4,17 @@ Covers the path that users will hit first: load a bundled PBG JSON,
 resolve relative input-file paths, run the Composite, get a summary.
 """
 
+import importlib
 import json
 import os
 
 import pytest
+
+lammps_available = importlib.util.find_spec("lammps") is not None
+needs_lammps = pytest.mark.skipif(
+    not lammps_available,
+    reason="lammps Python bindings not installed (not available on arm64 mac via pip)",
+)
 
 from pbg_composite_nfsim_caspule import (
     load_document,
@@ -43,6 +50,7 @@ def test_load_resolves_relative_input_paths(tmp_path):
     assert os.path.exists(doc['nfsim']['config']['model_file'])
 
 
+@needs_lammps
 @pytest.mark.timeout(120)
 def test_run_dimer_pbg_drains_atoms_and_credits_species(tmp_path):
     """The high-level `run()` is what `python -m pbg_composite_nfsim_caspule`
@@ -69,6 +77,7 @@ def test_run_dimer_pbg_drains_atoms_and_credits_species(tmp_path):
     assert len(dumped['history']) > 0
 
 
+@needs_lammps
 @pytest.mark.timeout(120)
 def test_run_overrides_input_files(tmp_path):
     """--caspule / --detector / --nfsim should win over what's in the JSON."""

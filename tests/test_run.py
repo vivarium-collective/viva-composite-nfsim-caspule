@@ -2,10 +2,17 @@
 caspule -> detector -> caspule (atom removal) and
 caspule -> detector -> nfsim (species injection)."""
 
+import importlib
 import os
 
 import pytest
 from process_bigraph import Composite, gather_emitter_results
+
+lammps_available = importlib.util.find_spec("lammps") is not None
+needs_lammps = pytest.mark.skipif(
+    not lammps_available,
+    reason="lammps Python bindings not installed (not available on arm64 mac via pip)",
+)
 
 from pbg_composite_nfsim_caspule.core import build_core
 from pbg_composite_nfsim_caspule.document import build_document
@@ -61,6 +68,7 @@ def _make_sim(decoupled=False):
     return Composite({'state': doc}, core=core)
 
 
+@needs_lammps
 @pytest.mark.timeout(120)
 def test_dimer_flows_caspule_to_nfsim():
     """Run long enough for at least one bond to form, then assert that
@@ -88,6 +96,7 @@ def test_dimer_flows_caspule_to_nfsim():
         f'num_atoms={num_atoms}')
 
 
+@needs_lammps
 @pytest.mark.timeout(120)
 def test_decoupled_baseline_keeps_atoms_and_species_zero():
     """Sanity check: with decoupled=True the detector still runs

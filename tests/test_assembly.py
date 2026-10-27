@@ -2,6 +2,7 @@
 reconciliation failures and missing wiring before any process actually
 runs."""
 
+import importlib
 import os
 
 import pytest
@@ -9,6 +10,12 @@ from process_bigraph import Composite
 
 from pbg_composite_nfsim_caspule.core import build_core
 from pbg_composite_nfsim_caspule.document import build_document
+
+lammps_available = importlib.util.find_spec("lammps") is not None
+needs_lammps = pytest.mark.skipif(
+    not lammps_available,
+    reason="lammps Python bindings not installed (not available on arm64 mac via pip)",
+)
 
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -77,6 +84,7 @@ def test_document_builds_without_errors():
     assert add_path == nfs_in == nfs_out
 
 
+@needs_lammps
 def test_composite_instantiates():
     """Composite() raises if schemas don't reconcile across stores."""
     core = build_core()
@@ -89,6 +97,7 @@ def test_composite_instantiates():
     assert sim is not None
 
 
+@needs_lammps
 def test_decoupled_baseline_also_assembles():
     """The baseline must build too — detector outputs route to a
     dead-end namespace but the schemas still have to line up."""
