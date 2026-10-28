@@ -1,0 +1,164 @@
+name: caspule-nfsim-dimer
+description: "CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a dimerization experiment.
+  Type-1 monomers diffuse on a simple-cubic lattice and form bonds via LAMMPS fix bond/create.
+  The ObservableDetector scans the bond graph each tick, extracts dimers (connected pairs),
+  removes them from the spatial pool, and injects them as molecules into NFSim's non-spatial
+  pool. NFSim then integrates reversible Dimer→Active activation and slow Active decay.
+  This composite demonstrates two-way coupling between spatial MD and rule-based kinetics
+  through the observable detector bridge."
+tags: [molecular-dynamics, rule-based-kinetics, nfsim, caspule, lammps, dimerization, multi-scale]
+
+requires:
+  processes: [CASPULEProcess, ObservableDetector, NFSimProcess, ram-emitter]
+
+state:
+  caspule:
+    _type: process
+    address: "local:CASPULEProcess"
+    config:
+      input_script: |
+        units lj
+        atom_style bond
+        boundary p p p
+        neighbor 0.5 bin
+        neigh_modify every 1 delay 0 check yes
+        region box block 0 8 0 8 0 8
+        create_box 1 box bond/types 1 extra/bond/per/atom 4 extra/special/per/atom 50
+        mass 1 1.0
+        lattice sc 1.6
+        create_atoms 1 box
+        pair_style soft 2.0
+        pair_coeff * * 30.0
+        bond_style harmonic
+        bond_coeff 1 5.0 1.5
+        minimize 1e-4 1e-4 100 100
+        fix nve all nve/limit 0.05
+        fix lan all langevin 0.4 0.4 1.0 12345
+        timestep 0.005
+        fix mkbnd all bond/create 1 1 1 1.8 1 iparam 1 1 jparam 1 1
+        thermo 5
+      input_file: ""
+    interval: 0.05
+    inputs:
+      atoms_to_remove: ["stores", "atoms_to_remove"]
+    outputs:
+      temperature: ["stores", "temperature"]
+      potential_energy: ["stores", "potential_energy"]
+      kinetic_energy: ["stores", "kinetic_energy"]
+      total_energy: ["stores", "total_energy"]
+      pressure: ["stores", "pressure"]
+      volume: ["stores", "volume"]
+      box_dimensions: ["stores", "box_dimensions"]
+      num_atoms: ["stores", "num_atoms"]
+      positions: ["stores", "positions"]
+      velocities: ["stores", "velocities"]
+      atom_types: ["stores", "atom_types"]
+      num_bonds: ["stores", "num_bonds"]
+      bonds: ["stores", "bonds"]
+      bonds_by_type: ["stores", "bonds_by_type"]
+      bond_energy: ["stores", "bond_energy"]
+      formed_bonds: ["stores", "formed_bonds"]
+      broken_bonds: ["stores", "broken_bonds"]
+      num_clusters: ["stores", "num_clusters"]
+      largest_cluster: ["stores", "largest_cluster"]
+      cluster_sizes: ["stores", "cluster_sizes"]
+
+  detector:
+    _type: step
+    address: "local:ObservableDetector"
+    config:
+      config_file: ""
+      rules:
+        - name: Dimer
+          bond_type_cluster: 1
+          min_size: 2
+          max_size: 2
+          remove_from_caspule: true
+    inputs:
+      positions: ["stores", "positions"]
+      bonds: ["stores", "bonds"]
+      atom_types: ["stores", "atom_types"]
+      num_atoms: ["stores", "num_atoms"]
+    outputs:
+      atoms_to_remove: ["stores", "atoms_to_remove"]
+      molecule_additions: ["stores", "species"]
+
+  nfsim:
+    _type: process
+    address: "local:NFSimProcess"
+    config:
+      model_file: ""
+      model_string: |
+        begin parameters
+            init_Dimer    0
+            init_Active   0
+            k_activate    0.1
+            k_deactivate  0.05
+            k_decay       0.01
+        end parameters
+        begin molecule types
+            Dimer()
+            Active()
+            Decay()
+        end molecule types
+        begin seed species
+            Dimer()    init_Dimer
+            Active()   init_Active
+        end seed species
+        begin observables
+            Molecules Dimer    Dimer()
+            Molecules Active   Active()
+        end observables
+        begin reaction rules
+            Dimer() -> Active()    k_activate
+            Active() -> Dimer()    k_deactivate
+            Active() -> Decay()    k_decay
+        end reaction rules
+      n_steps: 20
+    interval: 0.5
+    inputs:
+      observables: ["stores", "species"]
+    outputs:
+      observables: ["stores", "species"]
+
+  stores:
+    positions: []
+    bonds: []
+    atom_types: []
+    num_atoms: 0
+    atoms_to_remove: []
+    species:
+      Dimer: 0.0
+
+  emitter:
+    _type: step
+    address: "local:ram-emitter"
+    config:
+      emit:
+        temperature: float
+        potential_energy: float
+        kinetic_energy: float
+        total_energy: float
+        bond_energy: float
+        num_atoms: integer
+        num_bonds: integer
+        formed_bonds: integer
+        broken_bonds: integer
+        num_clusters: integer
+        largest_cluster: integer
+        time: float
+        species: "map[float]"
+    inputs:
+      temperature: ["stores", "temperature"]
+      potential_energy: ["stores", "potential_energy"]
+      kinetic_energy: ["stores", "kinetic_energy"]
+      total_energy: ["stores", "total_energy"]
+      bond_energy: ["stores", "bond_energy"]
+      num_atoms: ["stores", "num_atoms"]
+      num_bonds: ["stores", "num_bonds"]
+      formed_bonds: ["stores", "formed_bonds"]
+      broken_bonds: ["stores", "broken_bonds"]
+      num_clusters: ["stores", "num_clusters"]
+      largest_cluster: ["stores", "largest_cluster"]
+      time: ["global_time"]
+      species: ["stores", "species"]

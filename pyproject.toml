@@ -6,19 +6,25 @@ build-backend = "setuptools.build_meta"
 name = "viva-composite-nfsim-caspule"
 version = "0.1.0"
 description = "Process-bigraph composite: CASPULE bond-aware MD coupled to NFSim rule-based kinetics via an observable detector."
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
   "process-bigraph",
   "bigraph-schema",
   "bigraph-viz",
   "pyyaml",
-  "viva-caspule",
-  "viva-nfsim",
+  "jsonschema[format-nongpl]>=4.21",
+  "jinja2>=3.1",
+  "pypdf>=4.0",
+  "matplotlib",
+  "plotly",
+  "vivarium-workbench",
 ]
 
 [project.optional-dependencies]
+cli = ["typer", "rich"]
 test = ["pytest"]
 demo = ["matplotlib", "plotly"]
+dev = ["pytest", "matplotlib", "plotly"]
 
 [project.scripts]
 viva-composite-nfsim-caspule = "pbg_composite_nfsim_caspule.run:main"
@@ -28,3 +34,6 @@ include = ["pbg_composite_nfsim_caspule*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.uv.sources]
+vivarium-workbench = { git = "https://github.com/vivarium-collective/vivarium-workbench.git", branch = "main" }

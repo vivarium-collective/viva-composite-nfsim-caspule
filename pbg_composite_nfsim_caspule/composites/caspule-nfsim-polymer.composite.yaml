@@ -1,0 +1,186 @@
+name: caspule-nfsim-polymer
+description: "CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a polymer fractionation experiment.
+  Type-1 monomers polymerize into branched clusters on a 6x6x6 lattice; each atom can carry up to 4 bonds.
+  The ObservableDetector applies three size-based rules: dimers (size 2) and trimers (size 3) are extracted
+  from the spatial pool and injected into NFSim as distinct molecule types; polymers (size 4+) are observed
+  but kept in the spatial pool so the bond network remains visible. NFSim then integrates distinct decay
+  kinetics for each molecule class (dimers activate quickly, trimers slowly, polymers degrade slowly).
+  This composite demonstrates multi-rule detection and multi-species coupling across spatial and non-spatial
+  simulation regimes."
+tags: [molecular-dynamics, rule-based-kinetics, nfsim, caspule, lammps, polymerization, multi-scale, multi-rule]
+
+requires:
+  processes: [CASPULEProcess, ObservableDetector, NFSimProcess, ram-emitter]
+
+state:
+  caspule:
+    _type: process
+    address: "local:CASPULEProcess"
+    config:
+      input_script: |
+        units lj
+        atom_style bond
+        boundary p p p
+        neighbor 0.5 bin
+        neigh_modify every 1 delay 0 check yes
+        region box block 0 6 0 6 0 6
+        create_box 1 box bond/types 1 extra/bond/per/atom 4 extra/special/per/atom 50
+        mass 1 1.0
+        lattice sc 1.6
+        create_atoms 1 box
+        pair_style soft 2.0
+        pair_coeff * * 30.0
+        bond_style harmonic
+        bond_coeff 1 5.0 1.5
+        minimize 1e-4 1e-4 100 100
+        fix nve all nve/limit 0.05
+        fix lan all langevin 0.4 0.4 1.0 12345
+        timestep 0.005
+        fix mkbnd all bond/create 10 1 1 1.8 1 iparam 4 1 jparam 4 1
+        thermo 5
+      input_file: ""
+    interval: 0.05
+    inputs:
+      atoms_to_remove: ["stores", "atoms_to_remove"]
+    outputs:
+      temperature: ["stores", "temperature"]
+      potential_energy: ["stores", "potential_energy"]
+      kinetic_energy: ["stores", "kinetic_energy"]
+      total_energy: ["stores", "total_energy"]
+      pressure: ["stores", "pressure"]
+      volume: ["stores", "volume"]
+      box_dimensions: ["stores", "box_dimensions"]
+      num_atoms: ["stores", "num_atoms"]
+      positions: ["stores", "positions"]
+      velocities: ["stores", "velocities"]
+      atom_types: ["stores", "atom_types"]
+      num_bonds: ["stores", "num_bonds"]
+      bonds: ["stores", "bonds"]
+      bonds_by_type: ["stores", "bonds_by_type"]
+      bond_energy: ["stores", "bond_energy"]
+      formed_bonds: ["stores", "formed_bonds"]
+      broken_bonds: ["stores", "broken_bonds"]
+      num_clusters: ["stores", "num_clusters"]
+      largest_cluster: ["stores", "largest_cluster"]
+      cluster_sizes: ["stores", "cluster_sizes"]
+
+  detector:
+    _type: step
+    address: "local:ObservableDetector"
+    config:
+      config_file: ""
+      rules:
+        - name: Dimer
+          bond_type_cluster: 1
+          min_size: 2
+          max_size: 2
+          remove_from_caspule: true
+        - name: Trimer
+          bond_type_cluster: 1
+          min_size: 3
+          max_size: 3
+          remove_from_caspule: true
+        - name: Polymer
+          bond_type_cluster: 1
+          min_size: 4
+          remove_from_caspule: false
+    inputs:
+      positions: ["stores", "positions"]
+      bonds: ["stores", "bonds"]
+      atom_types: ["stores", "atom_types"]
+      num_atoms: ["stores", "num_atoms"]
+    outputs:
+      atoms_to_remove: ["stores", "atoms_to_remove"]
+      molecule_additions: ["stores", "species"]
+
+  nfsim:
+    _type: process
+    address: "local:NFSimProcess"
+    config:
+      model_file: ""
+      model_string: |
+        begin parameters
+            init_Dimer    0
+            init_Trimer   0
+            init_Polymer  0
+            init_Active   0
+            k_dimer_act   0.30
+            k_trimer_act  0.05
+            k_polymer_dec 0.02
+            k_active_dec  0.05
+        end parameters
+        begin molecule types
+            Dimer()
+            Trimer()
+            Polymer()
+            Active()
+            Decay()
+        end molecule types
+        begin seed species
+            Dimer()    init_Dimer
+            Trimer()   init_Trimer
+            Polymer()  init_Polymer
+            Active()   init_Active
+        end seed species
+        begin observables
+            Molecules Dimer    Dimer()
+            Molecules Trimer   Trimer()
+            Molecules Polymer  Polymer()
+            Molecules Active   Active()
+        end observables
+        begin reaction rules
+            Dimer()   -> Active()    k_dimer_act
+            Trimer()  -> Active()    k_trimer_act
+            Active()  -> Decay()     k_active_dec
+            Polymer() -> Decay()     k_polymer_dec
+        end reaction rules
+      n_steps: 20
+    interval: 0.5
+    inputs:
+      observables: ["stores", "species"]
+    outputs:
+      observables: ["stores", "species"]
+
+  stores:
+    positions: []
+    bonds: []
+    atom_types: []
+    num_atoms: 0
+    atoms_to_remove: []
+    species:
+      Dimer: 0.0
+      Trimer: 0.0
+      Polymer: 0.0
+
+  emitter:
+    _type: step
+    address: "local:ram-emitter"
+    config:
+      emit:
+        temperature: float
+        potential_energy: float
+        kinetic_energy: float
+        total_energy: float
+        bond_energy: float
+        num_atoms: integer
+        num_bonds: integer
+        formed_bonds: integer
+        broken_bonds: integer
+        num_clusters: integer
+        largest_cluster: integer
+        time: float
+        species: "map[float]"
+    inputs:
+      temperature: ["stores", "temperature"]
+      potential_energy: ["stores", "potential_energy"]
+      kinetic_energy: ["stores", "kinetic_energy"]
+      total_energy: ["stores", "total_energy"]
+      bond_energy: ["stores", "bond_energy"]
+      num_atoms: ["stores", "num_atoms"]
+      num_bonds: ["stores", "num_bonds"]
+      formed_bonds: ["stores", "formed_bonds"]
+      broken_bonds: ["stores", "broken_bonds"]
+      num_clusters: ["stores", "num_clusters"]
+      largest_cluster: ["stores", "largest_cluster"]
+      time: ["global_time"]
+      species: ["stores", "species"]

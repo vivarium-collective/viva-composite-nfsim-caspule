@@ -1,0 +1,73 @@
+schema_version: 2
+name: caspule-nfsim-multi-scale-coupling
+title: CASPULE-NFSim Multiscale Coupling
+created: '2026-10-27'
+status: planning
+question: >
+  Can bond-aware spatial MD (CASPULE) be tightly coupled to non-spatial
+  rule-based kinetics (NFSim) via an observable detector, and does this
+  coupling produce qualitatively different dynamics than running each
+  simulator independently?
+hypothesis: >
+  The ObservableDetector bridge enables bidirectional information flow:
+  spatial cluster structure drives NFSim species pools, and NFSim reaction
+  outcomes (atom removal) feed back into CASPULE. This coupling should
+  produce emergent dynamics — e.g. depleted monomer pools that slow bond
+  formation, and NFSim steady-states that reflect the spatial cluster-size
+  distribution — that neither simulator can reproduce alone.
+description: >
+  Two studies probe the CASPULE + NFSim composite at different levels of
+  spatial complexity: dimerization (simple pair formation) and polymer
+  fractionation (size-selective harvesting of clusters up to 4 bonds per
+  atom). Both use the same three-component wiring: CASPULE (MD) →
+  ObservableDetector (spatial→non-spatial bridge) → NFSim (rule-based
+  kinetics).
+studies:
+- caspule-nfsim-dimer
+- caspule-nfsim-polymer
+executive:
+  what_is_this: >
+    This workspace demonstrates a process-bigraph composite that couples
+    CASPULE (bond-aware LAMMPS MD) to NFSim (BioNetGen rule-based kinetics)
+    through a spatial observable detector. CASPULE evolves atoms and bond
+    clusters; the detector identifies spatial patterns (dimers, trimers,
+    polymers), optionally removes matched atoms from CASPULE, and injects
+    them as molecule counts into NFSim's non-spatial pool. NFSim then
+    evolves downstream kinetics. The composite provides a reusable scaffold
+    for multiscale spatial-to-non-spatial coupling experiments.
+  verdict: Pending — CASPULE requires OpenMPI on the build host.
+  verdict_status: in-progress
+  verdict_detail: >
+    Composite specs are registered and discoverable in the Composites tab.
+    Simulation runs require CASPULE/LAMMPS with MPI support (libmpi.12.dylib),
+    which was not available on the build host (arm64 macOS without OpenMPI).
+    Studies are scaffolded and ready to run on a compatible host.
+  decisions_needed: []
+  computed_verdict_status: passing
+  computed_acceptance:
+    criteria:
+    - study: caspule-nfsim-dimer
+      behavior: caspule-nfsim-dimer-behaves
+      result: passing
+    - study: caspule-nfsim-polymer
+      behavior: caspule-nfsim-polymer-behaves
+      result: passing
+    unmet: []
+    diverges_from_authored: true
+scientific_argument:
+  main_claim: >
+    A process-bigraph composite can faithfully couple bond-aware spatial MD
+    to rule-based non-spatial kinetics through a declarative observable
+    detector, enabling multiscale simulation of cluster-formation dynamics.
+  evidence_for: []
+  evidence_against: []
+  key_figures: []
+  caveats:
+  - >
+    CASPULE requires LAMMPS with bond/create fix and custom cluster analysis;
+    builds with OpenMPI are needed for the published PyPI wheel.
+acceptance_criteria:
+- study: caspule-nfsim-dimer
+  behavior: caspule-nfsim-dimer-behaves
+- study: caspule-nfsim-polymer
+  behavior: caspule-nfsim-polymer-behaves
