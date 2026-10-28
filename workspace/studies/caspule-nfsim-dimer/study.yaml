@@ -1,0 +1,68 @@
+schema_version: 4
+name: caspule-nfsim-dimer
+title: CASPULE-NFSim Dimerization
+created: '2026-10-27'
+status: planned
+execution_status: planned
+verdict: null
+phase: Design
+question: >
+  How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule
+  counts into downstream NFSim rule-based kinetics, and what does the
+  coupled temporal trajectory of dimer counts and thermo state look like?
+experiment: >
+  Run the `caspule-nfsim-dimer` composite: CASPULE evolves a Lennard-Jones
+  monomer gas with bond/create fix. The ObservableDetector scans the bond
+  graph each step, harvests connected pairs (dimers), removes them from the
+  MD pool, and injects them as `Dimer` molecules into NFSim. NFSim then
+  evolves activation/deactivation/decay reactions on the Dimer/Active pool.
+  Expected: `num_bonds` and `num_clusters` increase over time as the gas
+  condenses; `Dimer` count in NFSim rises and then reaches a steady state
+  set by the kinetic rates.
+description: >
+  Baseline dimerization study: couples CASPULE bond-aware MD to NFSim
+  rule-based kinetics via the ObservableDetector bridge. Tracks spatial
+  bond counts (CASPULE side) and non-spatial species pools (NFSim side).
+baseline:
+- name: baseline
+  composite: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer
+  params: {}
+variants: []
+behavior_tests:
+- name: caspule-nfsim-dimer-behaves
+  classification: primary
+  description: >
+    Bond count increases over the simulation as monomers dimerize; the
+    Dimer species count in NFSim rises monotonically then plateaus.
+  measure:
+    kind: derived_scalar
+    field: num_bonds
+  pass_if:
+    op: ">"
+    value: 0
+  requires_simulation: baseline
+pipeline_gate:
+  prerequisites: []
+  enables: []
+canonical_runs:
+- name: default
+  script: studies/caspule-nfsim-dimer/sims/run.py
+  args: []
+  label: caspule-nfsim-dimer
+  default: true
+visualizations:
+- name: caspule-nfsim-dimer-world
+  view: world
+  status: stub
+  description: "3D scatter of CASPULE atom positions and bond edges at each step."
+- name: caspule-nfsim-dimer-mechanism
+  view: mechanism
+  status: stub
+  description: >
+    Time-series of spatial bond count + cluster count (CASPULE) overlaid
+    with NFSim species pools (Dimer, Active).
+findings: []
+confidence: Planned
+report:
+  verdict: null
+result: null

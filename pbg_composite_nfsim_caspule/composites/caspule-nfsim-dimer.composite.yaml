@@ -1,4 +1,4 @@
-name: nfsim-caspule-dimer
+name: caspule-nfsim-dimer
 description: "CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a dimerization experiment.
   Type-1 monomers diffuse on a simple-cubic lattice and form bonds via LAMMPS fix bond/create.
   The ObservableDetector scans the bond graph each tick, extracts dimers (connected pairs),

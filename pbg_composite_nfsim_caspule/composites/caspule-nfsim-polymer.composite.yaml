@@ -1,4 +1,4 @@
-name: nfsim-caspule-polymer
+name: caspule-nfsim-polymer
 description: "CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a polymer fractionation experiment.
   Type-1 monomers polymerize into branched clusters on a 6x6x6 lattice; each atom can carry up to 4 bonds.
   The ObservableDetector applies three size-based rules: dimers (size 2) and trimers (size 3) are extracted

@@ -229,8 +229,8 @@ Four suites:
 
 | Composite | What it is |
 |---|---|
-| `nfsim-caspule-dimer` | CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a dimerization experiment. |
-| `nfsim-caspule-polymer` | CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a polymer fractionation experiment. |
+| `caspule-nfsim-dimer` | CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a dimerization experiment. |
+| `caspule-nfsim-polymer` | CASPULE bond-aware MD coupled to NFSim rule-based kinetics for a polymer fractionation experiment. |
 <!-- END:composites -->
 
 <!-- BEGIN:investigations -->
@@ -238,7 +238,7 @@ Four suites:
 
 | Investigation | Research question |
 |---|---|
-| [Caspule–nfsim multi scale coupling _(planning)_](https://vivarium-collective.github.io/viva-composite-nfsim-caspule/investigations/caspule-nfsim-multi-scale-coupling.html) | TBD — what overarching question ties these studies together? |
+| [CASPULE-NFSim Multiscale Coupling _(planning)_](https://vivarium-collective.github.io/viva-composite-nfsim-caspule/investigations/caspule-nfsim-multi-scale-coupling.html) | Can bond-aware spatial MD (CASPULE) be tightly coupled to non-spatial rule-based kinetics (NFSim) via an observable detector, and does this coupling produce qualitatively different dynamics than runn… |
 <!-- END:investigations -->
 
 ## Limitations

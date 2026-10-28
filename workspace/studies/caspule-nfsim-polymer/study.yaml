@@ -1,0 +1,72 @@
+schema_version: 4
+name: caspule-nfsim-polymer
+title: CASPULE-NFSim Polymer Fractionation
+created: '2026-10-27'
+status: planned
+execution_status: planned
+verdict: null
+phase: Design
+question: >
+  How does size-based fractionation of spatial bond clusters (dimers, trimers,
+  and larger polymers) into distinct NFSim molecule species shape the downstream
+  non-spatial activation and decay kinetics?
+experiment: >
+  Run the `caspule-nfsim-polymer` composite: CASPULE grows branched polymer
+  clusters (up to 4 bonds per atom) in a denser LJ gas. The ObservableDetector
+  applies three rules: dimers and trimers are harvested and removed from the MD
+  pool; clusters of size 4+ are counted as `Polymer` but left in place. Each
+  harvested species is injected into NFSim's non-spatial pool with distinct
+  activation rates (dimers activate fast; trimers slow; polymers decay slowly).
+  Expected: the spatial bond graph grows over time while the non-spatial Active
+  pool builds up from size-differentiated precursors.
+description: >
+  Polymer fractionation study: demonstrates size-selective coupling between
+  spatial bond clusters in CASPULE and a multi-species NFSim kinetics model.
+baseline:
+- name: baseline
+  composite: pbg_composite_nfsim_caspule.composites.caspule-nfsim-polymer
+  params: {}
+variants: []
+behavior_tests:
+- name: caspule-nfsim-polymer-behaves
+  classification: primary
+  description: >
+    Largest cluster grows over time as polymers form; Dimer and Trimer
+    counts in NFSim rise as spatial clusters are harvested.
+  measure:
+    kind: derived_scalar
+    field: largest_cluster
+  pass_if:
+    op: ">"
+    value: 0
+  requires_simulation: baseline
+pipeline_gate:
+  prerequisites:
+  - study: caspule-nfsim-dimer
+    condition: tests-passed
+    relation: builds-on
+  enables: []
+canonical_runs:
+- name: default
+  script: studies/caspule-nfsim-polymer/sims/run.py
+  args: []
+  label: caspule-nfsim-polymer
+  default: true
+visualizations:
+- name: caspule-nfsim-polymer-world
+  view: world
+  status: stub
+  description: >
+    3D scatter of CASPULE atom positions and bond edges; polymer networks
+    (size 4+) remain visible while dimers/trimers are harvested.
+- name: caspule-nfsim-polymer-mechanism
+  view: mechanism
+  status: stub
+  description: >
+    Time-series of Dimer/Trimer/Polymer/Active NFSim species overlaid with
+    CASPULE cluster-size distribution showing fractionation dynamics.
+findings: []
+confidence: Planned
+report:
+  verdict: null
+result: null
