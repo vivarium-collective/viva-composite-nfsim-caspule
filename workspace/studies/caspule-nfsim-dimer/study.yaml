@@ -4,7 +4,7 @@ title: CASPULE-NFSim Dimerization
 created: '2026-10-27'
 status: planned
 execution_status: planned
-verdict: null
+verdict:
 phase: Design
 question: >
   How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule
@@ -44,6 +44,12 @@ behavior_tests:
 pipeline_gate:
   prerequisites: []
   enables: []
+  gate_evaluator:
+    result: blocked
+    blocked_by:
+    - caspule-nfsim-dimer-behaves
+    evaluated_by: code
+    diverges_from_authored: false
 canonical_runs:
 - name: default
   script: studies/caspule-nfsim-dimer/sims/run.py
@@ -53,16 +59,321 @@ canonical_runs:
 visualizations:
 - name: caspule-nfsim-dimer-world
   view: world
-  status: stub
-  description: "3D scatter of CASPULE atom positions and bond edges at each step."
+  address: "local:TimeSeriesFromObservables"
+  status: active
+  description: "Atom count and temperature trajectory showing monomer pool depletion as dimers are harvested."
+  config:
+    observables: [num_atoms, temperature]
+    title: "CASPULE monomer pool — dimerization depletion"
 - name: caspule-nfsim-dimer-mechanism
   view: mechanism
-  status: stub
+  address: "local:NFSimCaspuleMechanism"
+  status: active
   description: >
-    Time-series of spatial bond count + cluster count (CASPULE) overlaid
+    Time-series of spatial cluster count (CASPULE) overlaid
     with NFSim species pools (Dimer, Active).
+  config:
+    observables: [num_clusters, "species.Dimer", "species.Active"]
+    title: "CASPULE clusters + NFSim species — dimerization mechanism"
 findings: []
 confidence: Planned
 report:
-  verdict: null
-result: null
+  verdict:
+result:
+runs:
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer__1793190184__8a1d57
+  status: completed
+  timestamp: 1793190201.644524
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.7587 > 0.0
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: agree
+  provenance:
+    params:
+      n_steps:
+        value: 30
+        source: resolved
+    params_captured_at: '2026-10-28'
+    params_source: dashboard-runner
+  outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      detail: 0.7587 > 0.0
+      operator: derived_scalar/>
+      evaluated_by: code
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      auto_evaluated: true
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer__1793190139__f882e6
+  status: failed
+  timestamp: 1793190142.179871
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.7587 > 0.0
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: no_authored
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer__1793190101__c6a076
+  status: failed
+  timestamp: 1793190104.227104
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.7587 > 0.0
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: no_authored
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer__1793190539__b8f955
+  status: completed
+  timestamp: 1793190554.888623
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.7587 > 0.0
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: agree
+  provenance:
+    params:
+      n_steps:
+        value: 30
+        source: resolved
+    params_captured_at: '2026-10-28'
+    params_source: dashboard-runner
+  outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      detail: 0.7587 > 0.0
+      operator: derived_scalar/>
+      evaluated_by: code
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      auto_evaluated: true
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer__1793190896__53b9f1
+  status: completed
+  timestamp: 1793190913.340168
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.7587 > 0.0
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: no_authored
+  provenance:
+    params:
+      n_steps:
+        value: 30
+        source: resolved
+    params_captured_at: '2026-10-28'
+    params_source: dashboard-runner
+  outcomes:
+    caspule-nfsim-dimer-behaves:
+      result: PASS
+      measured_value: 0.758725
+      detail: 0.7587 > 0.0
+      operator: derived_scalar/>
+      evaluated_by: code
+      axis:
+        id: caspule-nfsim-dimer-behaves
+        label: "Bond count increases over the simulation as monomers dimerize; the Dimer species count in NFSim rises monotonically then plateaus.\n"
+        verdict: within_tol
+        value: 0.758725
+        meter: 0.8793625
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.758725
+        severity: hard
+        units:
+        knob:
+        citation:
+      auto_evaluated: true
+simulation_set:
+- name: baseline-baseline
+  kind: single
+  base_model: pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer
+  is_baseline: true
+  status: ran
+  pass_fail_tests:
+  - caspule-nfsim-dimer-behaves

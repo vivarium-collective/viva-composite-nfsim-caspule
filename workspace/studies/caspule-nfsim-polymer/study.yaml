@@ -4,7 +4,7 @@ title: CASPULE-NFSim Polymer Fractionation
 created: '2026-10-27'
 status: planned
 execution_status: planned
-verdict: null
+verdict:
 phase: Design
 question: >
   How does size-based fractionation of spatial bond clusters (dimers, trimers,
@@ -46,6 +46,12 @@ pipeline_gate:
     condition: tests-passed
     relation: builds-on
   enables: []
+  gate_evaluator:
+    result: blocked
+    blocked_by:
+    - caspule-nfsim-polymer-behaves
+    evaluated_by: code
+    diverges_from_authored: false
 canonical_runs:
 - name: default
   script: studies/caspule-nfsim-polymer/sims/run.py
@@ -55,18 +61,105 @@ canonical_runs:
 visualizations:
 - name: caspule-nfsim-polymer-world
   view: world
-  status: stub
+  address: "local:TimeSeriesFromObservables"
+  status: active
   description: >
-    3D scatter of CASPULE atom positions and bond edges; polymer networks
-    (size 4+) remain visible while dimers/trimers are harvested.
+    Atom count, largest cluster, and bond count trajectory showing polymer
+    network growth as monomers condense and dimers/trimers are harvested.
+  config:
+    observables: [num_atoms, largest_cluster, num_bonds]
+    title: "CASPULE polymer growth — atom and cluster trajectory"
 - name: caspule-nfsim-polymer-mechanism
   view: mechanism
-  status: stub
+  address: "local:NFSimCaspuleMechanism"
+  status: active
   description: >
     Time-series of Dimer/Trimer/Polymer/Active NFSim species overlaid with
     CASPULE cluster-size distribution showing fractionation dynamics.
+  config:
+    observables: [num_clusters, largest_cluster, "species.Dimer", "species.Trimer", "species.Active"]
+    title: "CASPULE clusters + NFSim species — polymer fractionation mechanism"
 findings: []
 confidence: Planned
 report:
-  verdict: null
-result: null
+  verdict:
+result:
+runs:
+- name: pbg_composite_nfsim_caspule.composites.caspule-nfsim-polymer__1793190935__dba387
+  status: completed
+  timestamp: 1793190948.830933
+  emitter:
+    kind: unknown
+  env_id: 2c458b0b35533230
+  params: '{}'
+  computed_outcomes:
+    caspule-nfsim-polymer-behaves:
+      result: PASS
+      measured_value: 0.01214
+      evaluated_by: code
+      operator: derived_scalar/>
+      detail: 0.01214 > 0.0
+      axis:
+        id: caspule-nfsim-polymer-behaves
+        label: "Largest cluster grows over time as polymers form; Dimer and Trimer counts in NFSim rise as spatial clusters are harvested.\n"
+        verdict: within_tol
+        value: 0.01214
+        meter: 0.50607
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.01214
+        severity: hard
+        units:
+        knob:
+        citation:
+      reconcile: no_authored
+  provenance:
+    params:
+      n_steps:
+        value: 30
+        source: resolved
+    params_captured_at: '2026-10-28'
+    params_source: dashboard-runner
+  outcomes:
+    caspule-nfsim-polymer-behaves:
+      result: PASS
+      measured_value: 0.01214
+      detail: 0.01214 > 0.0
+      operator: derived_scalar/>
+      evaluated_by: code
+      axis:
+        id: caspule-nfsim-polymer-behaves
+        label: "Largest cluster grows over time as polymers form; Dimer and Trimer counts in NFSim rise as spatial clusters are harvested.\n"
+        verdict: within_tol
+        value: 0.01214
+        meter: 0.50607
+        detail:
+        expected:
+          kind: value
+          value: 0.0
+          low:
+          high:
+          op: '>'
+          tol: 0.05
+          statement:
+          units:
+        margin: 0.01214
+        severity: hard
+        units:
+        knob:
+        citation:
+      auto_evaluated: true
+simulation_set:
+- name: baseline-baseline
+  kind: single
+  base_model: pbg_composite_nfsim_caspule.composites.caspule-nfsim-polymer
+  is_baseline: true
+  status: ran

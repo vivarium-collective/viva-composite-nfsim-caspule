@@ -43,6 +43,17 @@ executive:
     which was not available on the build host (arm64 macOS without OpenMPI).
     Studies are scaffolded and ready to run on a compatible host.
   decisions_needed: []
+  computed_verdict_status: passing
+  computed_acceptance:
+    criteria:
+    - study: caspule-nfsim-dimer
+      behavior: caspule-nfsim-dimer-behaves
+      result: passing
+    - study: caspule-nfsim-polymer
+      behavior: caspule-nfsim-polymer-behaves
+      result: passing
+    unmet: []
+    diverges_from_authored: true
 scientific_argument:
   main_claim: >
     A process-bigraph composite can faithfully couple bond-aware spatial MD

@@ -1,0 +1,46 @@
+{
+  "count_split": {
+    "acceptance_criteria": {
+      "fail": 0,
+      "pass": 0,
+      "total": 0
+    },
+    "committed_rerunnable": 1,
+    "expected_fail": {
+      "behaved": 0,
+      "total": 0
+    },
+    "label": "pins: 0/0; acceptance: 0/0; unclassified: 1",
+    "narrated": 0,
+    "regression_pins": {
+      "fail": 0,
+      "pass": 0,
+      "total": 0
+    },
+    "unclassified": 1
+  },
+  "n_fail": 0,
+  "n_pass": 1,
+  "n_total": 1,
+  "overall": "within_tol",
+  "schema": "behavior_test_card/v1",
+  "tests": [
+    {
+      "band": "expected > 0",
+      "band_basis": "",
+      "cites": [],
+      "detail": "0.01214 > 0.0",
+      "en": "Largest cluster grows over time as polymers form; Dimer and Trimer counts in NFSim rise as spatial clusters are harvested.",
+      "expected_fail": false,
+      "gate_class": null,
+      "margin": 0.01214,
+      "measured_value": 0.01214,
+      "meter": 0.50607,
+      "name": "caspule-nfsim-polymer-behaves",
+      "result": "PASS",
+      "severity": "hard",
+      "units": "",
+      "verdict": "within_tol"
+    }
+  ]
+}
