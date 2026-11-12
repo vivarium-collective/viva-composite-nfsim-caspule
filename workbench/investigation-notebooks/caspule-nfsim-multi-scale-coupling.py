@@ -264,7 +264,7 @@ def _render_one(address, config, runs_db, study_yaml, overrides=None):
 
 # **Composite `pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer`** — `spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer` (static spec file, editable dict)
 
-from viva_superpowers.composite_spec import load_spec
+from discovery_engine.composite_spec import load_spec
 spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer = load_spec(REPO / 'pbg_composite_nfsim_caspule/composites/caspule-nfsim-dimer.composite.yaml')
 describe_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer)
 
@@ -309,7 +309,7 @@ if RERUN:
     from process_bigraph import Composite
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer) for', STEPS_baseline, 'steps')
@@ -317,7 +317,7 @@ if RERUN:
         print(f"baseline not runnable yet: {type(_e).__name__}: {_e}")
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer) for', STEPS_baseline, 'steps')
@@ -325,7 +325,7 @@ if RERUN:
         print(f"baseline not runnable yet: {type(_e).__name__}: {_e}")
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer) for', STEPS_baseline, 'steps')
@@ -333,7 +333,7 @@ if RERUN:
         print(f"baseline not runnable yet: {type(_e).__name__}: {_e}")
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer) for', STEPS_baseline, 'steps')
@@ -341,7 +341,7 @@ if RERUN:
         print(f"baseline not runnable yet: {type(_e).__name__}: {_e}")
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_dimer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-dimer) for', STEPS_baseline, 'steps')
@@ -396,7 +396,7 @@ _save_viz('caspule-nfsim-dimer', 'caspule-nfsim-dimer-mechanism', _render_one('l
 
 # **Composite `pbg_composite_nfsim_caspule.composites.caspule-nfsim-polymer`** — `spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_polymer` (static spec file, editable dict)
 
-from viva_superpowers.composite_spec import load_spec
+from discovery_engine.composite_spec import load_spec
 spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_polymer = load_spec(REPO / 'pbg_composite_nfsim_caspule/composites/caspule-nfsim-polymer.composite.yaml')
 describe_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_polymer)
 
@@ -433,7 +433,7 @@ if RERUN:
     from process_bigraph import Composite
     try:
         with quiet():  # keep per-step stdout out of the notebook
-            from viva_superpowers.composite_spec import build_composite_from_spec
+            from discovery_engine.composite_spec import build_composite_from_spec
             _comp = build_composite_from_spec(spec_pbg_composite_nfsim_caspule_composites_caspule_nfsim_polymer, {'interval': INTERVAL_baseline}, core=core)
             _comp.run(STEPS_baseline)
         print('ran', 'baseline', f'(pbg_composite_nfsim_caspule.composites.caspule-nfsim-polymer) for', STEPS_baseline, 'steps')

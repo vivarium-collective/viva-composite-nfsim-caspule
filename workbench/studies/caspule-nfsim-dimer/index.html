@@ -20,7 +20,7 @@
   <div style="display:flex; align-items:center; gap:14px; justify-content:space-between;">
   <div style="display:flex; align-items:center; gap:12px; min-width:0; flex-wrap:wrap">
   <h1 class="study-title" style="margin:0">
-    <span class="study-name" id="study-name" data-slug="caspule-nfsim-dimer" data-study-kind="computational" title="caspule-nfsim-dimer">CASPULE-NFSim Dimerization</span>
+    <span class="study-name" id="study-name" data-slug="caspule-nfsim-dimer" data-study-kind="computational" title="caspule-nfsim-dimer" data-edit-kind="study" data-edit-field="title" data-edit-value="CASPULE-NFSim Dimerization" data-edit-label="Title">CASPULE-NFSim Dimerization</span>
     
   </h1>
     
@@ -50,8 +50,9 @@
 
 
 
-<p id="study-question-headline" class="study-question-headline"><span class="q-glyph">Q</span> How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
-</p>
+<p id="study-question-headline" class="study-question-headline"><span class="q-glyph">Q</span> <span class="study-question-headline-text" data-edit-kind="study" data-edit-field="question" data-edit-value="How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
+" data-edit-multiline data-edit-label="Question">How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
+</span></p>
 
 <nav class="study-tabs" aria-label="Study sections">
   
@@ -236,6 +237,9 @@
 /* findings */
 .findings-section{padding:14px 16px;background:#fafbff;border:1px solid #c7d2fe;border-radius:8px}
 .finding-card{padding:12px 14px;margin:10px 0;border:1px solid #e2e8f0;border-left:5px solid #6366f1;border-radius:6px;background:#fff}
+/* Brief highlight when an item is reached via a ?ev= evidence deep-link. */
+.ev-flash{animation:ev-flash-kf 1.9s ease-out;scroll-margin-top:12px}
+@keyframes ev-flash-kf{0%{box-shadow:0 0 0 3px #fbbf24}70%{box-shadow:0 0 0 3px rgba(251,191,36,0.45)}100%{box-shadow:0 0 0 0 rgba(251,191,36,0)}}
 .finding-card.finding-status-confirms{border-left-color:#10b981}
 .finding-card.finding-status-partial{border-left-color:#f59e0b}
 .finding-card.finding-status-contradicts{border-left-color:#dc2626}
@@ -544,7 +548,7 @@
 
     <div class="ctr-block">
       <h2 class="overview-label ctr-h">Claim</h2>
-      <p class="ctr-text">How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
+      <p class="ctr-text" data-edit-kind="study" data-edit-field="claim" data-edit-value="" data-edit-multiline data-edit-label="Claim">How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
 </p>
       
     </div>
@@ -553,7 +557,8 @@
     <div class="ctr-block">
       <h2 class="overview-label ctr-h">Background</h2>
       <div class="ctr-meta">
-        <div class="ctr-meta-row"><span class="ctr-meta-k">Question</span> <span class="ctr-meta-item">How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
+        <div class="ctr-meta-row"><span class="ctr-meta-k">Question</span> <span class="ctr-meta-item" data-edit-kind="study" data-edit-field="question" data-edit-value="How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
+" data-edit-multiline data-edit-label="Question">How does spatial bond-formation in a CASPULE LJ monomer gas feed molecule counts into downstream NFSim rule-based kinetics, and what does the coupled temporal trajectory of dimer counts and thermo state look like?
 </span></div>
         
       </div>
@@ -562,7 +567,7 @@
 
     <div class="ctr-block">
       <h2 class="overview-label ctr-h">Model &amp; approach</h2>
-      <p class="ctr-text">Run the `caspule-nfsim-dimer` composite: CASPULE evolves a Lennard-Jones monomer gas with bond/create fix. The ObservableDetector scans the bond graph each step, harvests connected pairs (dimers), removes them from the MD pool, and injects them as `Dimer` molecules into NFSim. NFSim then evolves activation/deactivation/decay reactions on the Dimer/Active pool. Expected: `num_bonds` and `num_clusters` increase over time as the gas condenses; `Dimer` count in NFSim rises and then reaches a steady state set by the kinetic rates.
+      <p class="ctr-text" data-edit-kind="study" data-edit-field="objective" data-edit-value="" data-edit-multiline data-edit-label="Objective">Run the `caspule-nfsim-dimer` composite: CASPULE evolves a Lennard-Jones monomer gas with bond/create fix. The ObservableDetector scans the bond graph each step, harvests connected pairs (dimers), removes them from the MD pool, and injects them as `Dimer` molecules into NFSim. NFSim then evolves activation/deactivation/decay reactions on the Dimer/Active pool. Expected: `num_bonds` and `num_clusters` increase over time as the gas condenses; `Dimer` count in NFSim rises and then reaches a steady state set by the kinetic rates.
 </p>
       <div class="ctr-meta">
         <div class="ctr-meta-row"><span class="ctr-meta-k">Model</span> <code>baseline</code><a class="ov-tablink" href="#" onclick="_setStudyTab('compose');return false;">model →</a></div>
@@ -579,7 +584,8 @@
 
     <div class="ctr-block">
       <h2 class="overview-label ctr-h">Result</h2>
-      <p class="ctr-text">behavior-tests: within tolerance</p>
+      
+      <p class="ctr-text" data-edit-kind="study" data-edit-field="result" data-edit-value="None" data-edit-multiline data-edit-label="Result">behavior-tests: within tolerance</p>
       
       
       <div class="ov-metrics">
@@ -604,11 +610,11 @@
       
       
       
-      <div class="finding-card finding-kind-computational finding-status-confirms">
+      <div class="finding-card finding-kind-computational finding-status-confirms" id="finding-report-card-behavior-tests">
         <details class="finding-details">
           <summary class="finding-row">
             <span class="finding-status-glyph">✓</span>
-            <span class="finding-claim finding-statement">behavior-tests: within tolerance</span>
+            <span class="finding-claim finding-statement" data-edit-kind="study" data-edit-field="findings[report-card-behavior-tests].statement" data-edit-value="behavior-tests: within tolerance" data-edit-multiline data-edit-label="Finding report-card-behavior-tests">behavior-tests: within tolerance</span>
             
           </summary>
           <div class="finding-drawer">
@@ -828,6 +834,12 @@
 <div class="overview-section" id="results-section">
   
   <div id="results-summary" data-study="caspule-nfsim-dimer" style="margin:0 0 16px"></div>
+
+  
+  <div id="gate-results-section" data-study="caspule-nfsim-dimer" style="margin:0 0 22px" hidden>
+    <h4>Gate results <span class="muted" style="font-size:0.8em;font-weight:normal">— each acceptance test's value, graded from run data</span></h4>
+    <div id="gate-results"></div>
+  </div>
 
   <h4>Latest run preview <span class="muted" style="font-size:0.8em;font-weight:normal">— downsampled sparkline + first/last/min/max per store</span></h4>
   <div id="results-preview" data-study="caspule-nfsim-dimer">
@@ -1110,7 +1122,7 @@ pass_if: {"op": "\u003e", "value": 0}</pre>
     
     <p class="muted small verdict-frozen-indicator" style="margin:0 0 8px 0"
        title="Content digest (sha256, sorted-key canonical JSON) of the frozen verdict payload — a locked record, not a live recompute.">
-      <span class="frozen-glyph">🔒</span> frozen 2026-10-28 12:40 UTC ·
+      <span class="frozen-glyph">🔒</span> frozen 2026-11-12 15:01 UTC ·
       <code style="font-family:ui-monospace,monospace">ca63decfd5</code>
     </p>
     
@@ -1268,11 +1280,12 @@ pass_if: {"op": "\u003e", "value": 0}</pre>
 </section>
 
 </main>
-<script>window.__DASH_CONFIG__ = { mode: "snapshot", interactiveUrl: "https://github.com/vivarium-collective/viva-composite-nfsim-caspule", basePath: "/viva-composite-nfsim-caspule/workbench", inputsDownloadBase: "https://github.com/vivarium-collective/viva-composite-nfsim-caspule/raw/main", provenance: {"repo_slug": "vivarium-collective/viva-composite-nfsim-caspule", "repo_url": "https://github.com/vivarium-collective/viva-composite-nfsim-caspule", "commit": "a9a798ae9906ee5986de5436d713a6011ea86f17", "commit_url": "https://github.com/vivarium-collective/viva-composite-nfsim-caspule/commit/a9a798ae9906ee5986de5436d713a6011ea86f17", "branch": "main", "lockfile": "uv.lock@570480feb740", "generated_at": "2026-10-28 12:40 UTC"} };</script>
+<script>window.__DASH_CONFIG__ = { mode: "snapshot", interactiveUrl: "https://github.com/vivarium-collective/viva-composite-nfsim-caspule", basePath: "/viva-composite-nfsim-caspule/workbench", inputsDownloadBase: "https://github.com/vivarium-collective/viva-composite-nfsim-caspule/raw/main", provenance: {"repo_slug": "vivarium-collective/viva-composite-nfsim-caspule", "repo_url": "https://github.com/vivarium-collective/viva-composite-nfsim-caspule", "commit": "a9a798ae9906ee5986de5436d713a6011ea86f17", "commit_url": "https://github.com/vivarium-collective/viva-composite-nfsim-caspule/commit/a9a798ae9906ee5986de5436d713a6011ea86f17", "branch": "main", "lockfile": "uv.lock@570480feb740", "generated_at": "2026-11-12 15:02 UTC"} };</script>
 <script src="/viva-composite-nfsim-caspule/workbench/assets/data-source.js"></script>
 <script src="/viva-composite-nfsim-caspule/workbench/assets/toast.js"></script>
 <script>
 window._studyName = "caspule-nfsim-dimer";
+window.__STUDY_INVESTIGATION__ = "caspule-nfsim-multi-scale-coupling";  // owning investigation (feedback save routing)
 window._study = null;  // populated by _bootstrapStudy() in study-detail.js
 
 // Save handler for the Conditions → Model settings editable rows.
@@ -1401,6 +1414,8 @@ window._seedFollowupProposal = _seedFollowupProposal;
 <script src="/viva-composite-nfsim-caspule/workbench/assets/progress-track.js"></script>
 <script src="/viva-composite-nfsim-caspule/workbench/assets/comparison-view.js"></script>
 <script src="/viva-composite-nfsim-caspule/workbench/assets/study-detail.js"></script>
+<script src="/viva-composite-nfsim-caspule/workbench/assets/study-feedback.js"></script>
+<script src="/viva-composite-nfsim-caspule/workbench/assets/inline-edit.js"></script>
 <script>
 // Re-assert the refresh-aware seed handlers AFTER study-detail.js (which
 // defines its own navigate-away _seedFollowupStudy). The embedded
