@@ -335,6 +335,20 @@ wheels = [
 ]
 
 [[package]]
+name = "compose-api-client"
+version = "0.7.72"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "attrs" },
+    { name = "httpx" },
+    { name = "python-dateutil" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/83/ff/c2bfb09aa2537c142fd775b53acc70892189c41d68d43404892fa6d5320a/compose_api_client-0.7.72.tar.gz", hash = "sha256:cfd495eb472502728f95dbba4cb47ecff33fee36fe4638d4c1f849109e12a26e", size = 193083, upload-time = "2026-10-29T02:42:39.735Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/be/a4/71968fa987f8624b799b22ac7e903bb94ac90bd2f0b7ddb21dadb186a50f/compose_api_client-0.7.72-py3-none-any.whl", hash = "sha256:0dd56f5d6d95389c6b9b8a7349ca47f3b950416b603b60a01f334c0e935cf4c0", size = 384441, upload-time = "2026-10-29T02:42:38.24Z" },
+]
+
+[[package]]
 name = "contourpy"
 version = "1.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -625,6 +639,34 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/01/ee/02a2c011bdab74c6fb3c75474d40b3052059d95df7e73351460c8588d963/h11-0.16.0.tar.gz", hash = "sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1", size = 101250, upload-time = "2025-04-24T03:35:25.427Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl", hash = "sha256:63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86", size = 37515, upload-time = "2025-04-24T03:35:24.344Z" },
+]
+
+[[package]]
+name = "httpcore"
+version = "1.0.9"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "h11" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/06/94/82699a10bca87a5556c9c59b5963f2d039dbd239f25bc2a63907a05a14cb/httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8", size = 85484, upload-time = "2025-04-24T22:06:22.219Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7e/f5/f66802a942d491edb555dd61e3a9961140fd64c90bce1eafd741609d334d/httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55", size = 78784, upload-time = "2025-04-24T22:06:20.566Z" },
+]
+
+[[package]]
+name = "httpx"
+version = "0.28.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "certifi" },
+    { name = "httpcore" },
+    { name = "idna" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b1/df/48c586a5fe32a0f01324ee087459e112ebb7224f646c0b5023f5e79e9956/httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc", size = 141406, upload-time = "2024-12-06T15:37:23.222Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2a/39/e50c7c3a983047577ee07d2a9e53faf5a69493943ec3f6a384bdc792deb2/httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad", size = 73517, upload-time = "2024-12-06T15:37:21.509Z" },
 ]
 
 [[package]]
@@ -1442,7 +1484,7 @@ wheels = [
 
 [[package]]
 name = "process-bigraph"
-version = "1.10.1"
+version = "1.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "bigraph-schema" },
@@ -1453,9 +1495,9 @@ dependencies = [
     { name = "scipy" },
     { name = "sympy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ef/80/0571e9030457043ac285b2090732413f3586faae2eb93752f0eba86424ce/process_bigraph-1.10.1.tar.gz", hash = "sha256:7348eaae39da99a07ff28f781da7728b5dba8fc76ddbbf0b1adae209308ad777", size = 265746, upload-time = "2026-10-25T18:45:36.348Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/31/17/a2e8246a1c7149d3fd18e63e333353a45c13a93fd07ce3691b3badaecf87/process_bigraph-1.11.0.tar.gz", hash = "sha256:df0433e462a9a1cef3b6cf66290c789a202997e714a9f6f3e8984fadbc07a176", size = 273107, upload-time = "2026-11-01T03:13:27.295Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/56/2b/c8786628416df2dae41afc4ec4e7e577054211bad450faa438a5bcc17aa9/process_bigraph-1.10.1-py3-none-any.whl", hash = "sha256:617a4d682dc3f2a78f12d2ae9f67106c6ce2bf88319ab5d95b392f54d8497f40", size = 286175, upload-time = "2026-10-25T18:45:34.626Z" },
+    { url = "https://files.pythonhosted.org/packages/9d/8e/f0c2fca736d84dd1e6d18894b438419cf38619721d31e39b1b3b42678a1f/process_bigraph-1.11.0-py3-none-any.whl", hash = "sha256:c299fbe1b34f1c04e23ced19db3445ff33b1bc6fcdcce3d2dfed0a40938a62c7", size = 291298, upload-time = "2026-11-01T03:13:25.806Z" },
 ]
 
 [[package]]
@@ -2374,6 +2416,33 @@ requires-dist = [
 provides-extras = ["cli", "test", "demo", "dev"]
 
 [[package]]
+name = "viva-discovery-engine"
+version = "0.3.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "bigraph-schema" },
+    { name = "click" },
+    { name = "filelock" },
+    { name = "jinja2" },
+    { name = "jsonschema", extra = ["format-nongpl"] },
+    { name = "numpy" },
+    { name = "polars" },
+    { name = "process-bigraph" },
+    { name = "psutil" },
+    { name = "pyyaml" },
+    { name = "rich" },
+    { name = "ruamel-yaml" },
+    { name = "scipy" },
+    { name = "typer" },
+    { name = "viva-emitters", extra = ["parquet"] },
+    { name = "viva-workspace" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d0/45/169e09454dfa3e11c1b455020a414a98d57b63956c3b485d2f50a12e9a5c/viva_discovery_engine-0.3.1.tar.gz", hash = "sha256:4415259c9648df5ba98d280c739b39198ecc2841ada31ff0dbbbf722a7f65bf0", size = 3314612, upload-time = "2026-11-10T17:58:47.843Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1d/4f/69ff48863f46099e8a82ab54bfc5a41e6f54df1bd8f253f6574d62a2821e/viva_discovery_engine-0.3.1-py3-none-any.whl", hash = "sha256:ca47c8a1590c2687f8d3489dacda78b0ab5ec9a8e13adc3c8d5013d7ff4e4dcf", size = 527741, upload-time = "2026-11-10T17:58:46.282Z" },
+]
+
+[[package]]
 name = "viva-emitters"
 version = "0.4.3"
 source = { registry = "https://pypi.org/simple" }
@@ -2407,8 +2476,8 @@ xarray = [
 
 [[package]]
 name = "viva-superpowers"
-version = "0.24.0"
-source = { git = "https://github.com/vivarium-collective/viva-superpowers.git?branch=main#6d90dedee06f52c642dcee13fd1128270f960c5a" }
+version = "0.26.0"
+source = { git = "https://github.com/vivarium-collective/viva-superpowers.git?branch=main#2abbb2343c5924ffcd0dff6d0a19b48e40e71c47" }
 dependencies = [
     { name = "bigraph-schema" },
     { name = "click" },
@@ -2420,6 +2489,7 @@ dependencies = [
     { name = "pypdf" },
     { name = "pyyaml" },
     { name = "ruamel-yaml" },
+    { name = "viva-discovery-engine" },
     { name = "viva-emitters" },
     { name = "viva-workspace" },
 ]
@@ -2440,11 +2510,12 @@ dependencies = [
 
 [[package]]
 name = "vivarium-workbench"
-version = "0.4.1"
-source = { git = "https://github.com/vivarium-collective/vivarium-workbench.git?branch=main#75deccc4dd3bfadadea2b8e4ddbc63d5991c6c29" }
+version = "0.5.2"
+source = { git = "https://github.com/vivarium-collective/vivarium-workbench.git?branch=main#6b94602a6817b1c95d6254a49740b83e4133a4cf" }
 dependencies = [
     { name = "bigraph-schema" },
     { name = "boto3" },
+    { name = "compose-api-client" },
     { name = "fastapi" },
     { name = "investigation-contracts" },
     { name = "jinja2" },
@@ -2459,6 +2530,7 @@ dependencies = [
     { name = "uvicorn" },
     { name = "viva-basic-processes" },
     { name = "viva-catalog" },
+    { name = "viva-discovery-engine" },
     { name = "viva-emitters", extra = ["parquet", "xarray"] },
     { name = "viva-superpowers", extra = ["evaluator"] },
     { name = "viva-workspace" },
